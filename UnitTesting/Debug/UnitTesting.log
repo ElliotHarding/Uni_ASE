@@ -1,0 +1,29 @@
+﻿  BST.cpp
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(25,15): error C2065:  'original': undeclared identifier
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(29,1): error C2601:  'BST::lookup': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(50,1): error C2601:  'BST::lookupRec': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(60,1): error C2601:  'BST::insert': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(65,1): error C2601:  'BST::insertRec': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(84,1): error C2601:  'BST::isLeaf': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(87,1): error C2601:  'BST::displayEntries': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(93,1): error C2601:  'BST::displayEntryRec': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(103,1): error C2601:  'BST::displayTree': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(108,1): error C2601:  'BST::displayTreeRec': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(120,1): error C2601:  'operator <<': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(126,1): error C2601:  'BST::remove': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(132,1): error C2601:  'BST::removeRec': local function definitions are illegal
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): message :  this line contains a '{' which has not yet been matched
+  UnitTesting.cpp
+  Generating Code...
+C:\Users\n0688119\Projects\Lab4\Lab2\Lab2\BST.cpp(23): error C1075:  '{': no matching token found
