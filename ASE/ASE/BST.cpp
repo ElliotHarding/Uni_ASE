@@ -34,6 +34,26 @@ BST::BST(const BST& original)
 	this->root = deepCopy(original.root);
 }
 
+BST & BST::operator=(const BST & original)
+{
+	this->root = original.root;
+	return *this;
+}
+
+BST::BST(BST && original)
+{
+	// steal the nodes from
+	// the original tree
+	this->root = original.root;
+	original.remove();
+}BST & BST::operator=(BST && original)
+{
+	// steal the nodes from
+	// the original tree
+	this->root = original.root;
+	original.remove();
+	return *this;
+}
 
 BST::Item* BST::lookup(Key k)
 {
@@ -158,5 +178,11 @@ void BST::deepDelete(Node*& n)
 BST::Node* BST::deepCopy(Node* original)
 {
 	Node* newNode = nullptr;
-	if (!isLeaf(original))	{		newNode = new Node(original->key, original->item);		newNode->leftChild = deepCopy(original->leftChild);		newNode->rightChild = deepCopy(original->rightChild);	}	return newNode;
+	if (!isLeaf(original))
+	{
+		newNode = new Node(original->key, original->item);
+		newNode->leftChild = deepCopy(original->leftChild);
+		newNode->rightChild = deepCopy(original->rightChild);
+	}
+	return newNode;
 }

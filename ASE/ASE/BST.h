@@ -11,6 +11,9 @@ public:
 	BST();
 	~BST();
 	BST(const BST&);
+	BST(BST &&);
+	BST & operator=(const BST &);
+	BST & operator=(BST &&);
 
 	void insert(Key, Item);
 	Item* lookup(Key);
