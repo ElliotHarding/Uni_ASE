@@ -8,28 +8,64 @@ namespace Containers
 	public:
 		using Key = Key;
 		using Item = Item;
-		
+
+		//Constructor
 		Dictionary() :
 			m_root(nullptr)
 		{
+		}
+
+		~Dictionary()
+		{
+			deepDelete(m_root);
+		}
+
+		//Copy constructor
+		Dictionary(const Dictionary& d)
+		{
+			m_root = d.deepCopy(d.m_root);
+		}
+
+		//Move constructor
+		Dictionary(Dictionary&& d)
+		{
+			m_root = d.deepCopy(d.m_root);
+			delete d;
+		}
+
+		//Copy assignment operator
+		Dictionary& operator=(const Dictionary& d)
+		{
+			m_root = d.deepCopy(d.m_root);
+		}
+
+		//Move assignment operator
+		Dictionary& operator=(Dictionary&& d)
+		{
+			m_root = d.deepCopy(d.m_root);
+			delete d;
 		}
 
 		bool insert(Key k, Item i)
 		{
 			Node* n = m_root;
 
-			while (n != nullptr)
+			while (true)
 			{
+				if (n==nullptr)
+					break;
+
 				if (n->m_key == k)
 				{
 					n->m_item = i;
-					return true;
+					return false;
 				}					
 
 				n = n->m_linkedNode;
 			}
 
-			return false;
+			n = new Node(k, i);
+			return true;
 		}
 
 		Item* lookup(Key k)
@@ -63,15 +99,20 @@ namespace Containers
 			{
 				if (n->m_linkedNode->m_key == k)
 				{
-					Node* temp ....
+					Node* toDelete = n->m_linkedNode;
+					if (n->m_linkedNode->m_linkedNode != nullptr)
+					{
+						n->m_linkedNode = n->m_linkedNode->m_linkedNode;
+					}
+					delete toDelete;
+					toDelete = nullptr;
+					return true;
 				}
-				if (n->m_key == k)
-					return n;
 
 				n = n->m_linkedNode;
 			}
 
-			return nullptr;
+			return false;
 		}
 
 	private:
@@ -89,21 +130,25 @@ namespace Containers
 			}
 		};
 
-		Node* m_root;
+		Node* m_root = nullptr;
 
-		Node* getNode(Key k)
+		Node* deepCopy(Node * n)
 		{
-			Node* n = m_root;
+			Node* newNode = new Node(n->m_key, n->m_item);
 
-			while (n != nullptr)
-			{
-				if (n->m_key == k)
-					return n;
+			if (n->m_linkedNode != nullptr)
+				newNode->m_linkedNode = deepCopy(n->m_linkedNode);
 
-				n = n->m_linkedNode;
-			}
+			return newNode;
+		}
 
-			return nullptr;
+		void deepDelete(Node* n)
+		{
+			if (n->m_linkedNode != nullptr)
+				deepDelete(n->m_linkedNode);
+
+			delete n;
+			n = nullptr;
 		}
 	};
 }
