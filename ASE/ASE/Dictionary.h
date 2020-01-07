@@ -49,23 +49,23 @@ namespace Containers
 
 		bool insert(Key k, Item i)
 		{
-			Node*& n = m_root;
-
+			Node** n = &m_root;
+			
 			while (true)
 			{
-				if (n==nullptr)
+				if (*n==nullptr)
 					break;
 
-				if (n->m_key == k)
+				if ((*n)->m_key == k)
 				{
-					n->m_item = i;
+					(*n)->m_item = i;
 					return false;
 				}					
 
-				n = n->m_linkedNode;
+				n = &((*n)->m_linkedNode);
 			}
 			
-			n = new Node(k, i);
+			*n = new Node(k, i);
 			return true;
 		}
 

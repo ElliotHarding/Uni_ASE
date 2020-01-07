@@ -1,6 +1,2 @@
 ﻿  ASE.cpp
-c:\users\elliot\documents\github\uni_ase\ase\ase\dictionary.h(65): error C2440: '=': cannot convert from 'Containers::Dictionary<std::string,std::string>::Node **' to 'Containers::Dictionary<std::string,std::string>::Node *'
-  c:\users\elliot\documents\github\uni_ase\ase\ase\dictionary.h(65): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-  c:\users\elliot\documents\github\uni_ase\ase\ase\dictionary.h(51): note: while compiling class template member function 'bool Containers::Dictionary<std::string,std::string>::insert(std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::basic_string<char,std::char_traits<char>,std::allocator<char>>)'
-  c:\users\elliot\documents\github\uni_ase\ase\ase\ase.cpp(14): note: see reference to function template instantiation 'bool Containers::Dictionary<std::string,std::string>::insert(std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::basic_string<char,std::char_traits<char>,std::allocator<char>>)' being compiled
-  c:\users\elliot\documents\github\uni_ase\ase\ase\ase.cpp(13): note: see reference to class template instantiation 'Containers::Dictionary<std::string,std::string>' being compiled
+  ASE.vcxproj -> C:\Users\elliot\Documents\Github\Uni_ASE\ASE\Debug\ASE.exe

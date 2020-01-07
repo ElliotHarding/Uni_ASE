@@ -14,9 +14,21 @@ int main()
 	dict.insert("key1", "item1");
 	dict.insert("key2", "item2");
 	dict.insert("key3", "item3");
+	
+	const char* sss = dict.lookup("key2")->c_str();
+	std::cout << sss << std::endl;
 
-	std::cout << dict.lookup("key2") << std::endl;
 	std::cout << dict.remove("key2") << std::endl;
-	int x = 0;
-	std::cin >> x;
+	
+	const char* ssss = dict.lookup("key1")->c_str();
+	std::cout << ssss << std::endl;
+
+	const char* sssss = dict.lookup("key3")->c_str();
+	std::cout << sssss << std::endl;
+
+	std::function<bool(std::string)> f = [](std::string s) { return s == "key2"; };
+	dict.removeIf(f);
+
+	const char* s = dict.lookup("key2")->c_str();
+	std::cout << s << std::endl;
 }
