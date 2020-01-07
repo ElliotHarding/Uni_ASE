@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 
 namespace Containers
 {
@@ -113,6 +114,20 @@ namespace Containers
 			}
 
 			return false;
+		}
+
+		template <typename T>
+		void removeIf(std::function<T> p)
+		{
+			Node* n = m_root;
+			while (n != nullptr)
+			{
+				Key toCheck = n->m_key;
+				n = n->m_linkedNode;
+
+				if (p(toCheck))
+					remove(toCheck);				
+			}
 		}
 
 	private:
