@@ -29,6 +29,6 @@ int main()
 	std::function<bool(std::string)> f = [](std::string s) { return s == "key2"; };
 	dict.removeIf(f);
 
-	const char* s = dict.lookup("key2")->c_str();
-	std::cout << s << std::endl;
+	Dictionary<std::string, std::string> dict2 = dict;
+
 }

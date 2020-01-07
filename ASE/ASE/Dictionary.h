@@ -3,7 +3,7 @@
 
 namespace Containers
 {
-	template<class keyTemplate, class itemTemplate>
+	template<typename keyTemplate, typename itemTemplate>
 	class Dictionary
 	{
 	public:
@@ -22,7 +22,7 @@ namespace Containers
 		}
 
 		//Copy constructor
-		Dictionary(const Dictionary& d)
+		Dictionary(const Dictionary<keyTemplate, itemTemplate>& d)
 		{
 			m_root = d.deepCopy(d.m_root);
 		}
@@ -150,7 +150,7 @@ namespace Containers
 
 		Node* m_root = nullptr;
 
-		Node* deepCopy(Node * n)
+		Node* deepCopy(Node * n) const
 		{
 			Node* newNode = new Node(n->m_key, n->m_item);
 
