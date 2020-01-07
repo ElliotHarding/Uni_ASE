@@ -3,12 +3,12 @@
 
 namespace Containers
 {
-	template<class Key, class Item>
+	template<class keyTemplate, class itemTemplate>
 	class Dictionary
 	{
 	public:
-		using Key = Key;
-		using Item = Item;
+		using Key = keyTemplate;
+		using Item = itemTemplate;
 
 		//Constructor
 		Dictionary() :
@@ -49,7 +49,7 @@ namespace Containers
 
 		bool insert(Key k, Item i)
 		{
-			Node* n = m_root;
+			Node*& n = m_root;
 
 			while (true)
 			{
@@ -64,7 +64,7 @@ namespace Containers
 
 				n = n->m_linkedNode;
 			}
-
+			
 			n = new Node(k, i);
 			return true;
 		}
@@ -86,6 +86,9 @@ namespace Containers
 
 		bool remove(Key k)
 		{
+			if (!m_root)
+				return false;
+
 			Node* n = m_root;
 
 			if (n->m_key == k)
