@@ -8,46 +8,87 @@ namespace Containers
 	{
 	public:
 		using Key = keyTemplate;
-		using Item = itemTemplate;
+		using Item = itemTemplate; 
 
-		//Constructor
+		/*
+			Constructor
+
+			Time complexity : O(1) — Constant
+			Reason: 
+
+		*/
 		Dictionary() :
 			m_root(nullptr)
 		{
 		}
 
+		/*
+		Constructor
+
+		Time complexity :
+		Reason:
+
+		*/
 		~Dictionary()
 		{
 			if(m_root != nullptr)
 				deepDelete(m_root);
 		}
 
-		//Copy constructor
+		/*
+			Copy constructor
+
+			Time complexity : O(n) — Linear
+			Reason: The recursive function deepCopy goes through each of the items in the dictionaries linked list
+				
+		*/
 		Dictionary(const Dictionary<keyTemplate, itemTemplate>& d)
 		{
 			m_root = d.deepCopy(d.m_root);
 		}
 
-		//Move constructor
+		/*
+			Move constructor
+
+			Time complexity : O(n) — Linear
+			Reason: The recursive function deepCopy goes through each of the items in the dictionaries linked list
+
+		*/
 		Dictionary(Dictionary&& d)
 		{
 			m_root = d.deepCopy(d.m_root);
 			delete d;
 		}
 
-		//Copy assignment operator
+		/*
+			Copy assignment operator
+
+			Time complexity : O(n) — Linear
+			Reason : The recursive function deepCopy goes through each of the items in the dictionaries linked list
+		*/
 		Dictionary& operator=(const Dictionary& d)
 		{
 			m_root = d.deepCopy(d.m_root);
 		}
 
-		//Move assignment operator
+		/*
+			Move assignment operator
+
+			Time complexity : O(n) — Linear
+			Reason : The recursive function deepCopy goes through each of the items in the dictionaries linked list
+		*/
 		Dictionary& operator=(Dictionary&& d)
 		{
 			m_root = d.deepCopy(d.m_root);
 			delete d;
 		}
 
+		/*
+			insert
+
+			Time complexity : O(n) — Linear
+			Reason : The nodes of the linked list need to be iterated through in order to find the position of insertion
+		*/
 		bool insert(Key k, Item i)
 		{
 			Node** n = &m_root;
@@ -70,6 +111,12 @@ namespace Containers
 			return true;
 		}
 
+		/*
+			lookup
+
+			Time complexity : O(n) — Linear
+			Reason : The nodes of the linked list need to be iterated through in order to find the position of the search node
+		*/
 		Item* lookup(Key k)
 		{
 			Node* n = m_root;
@@ -85,6 +132,12 @@ namespace Containers
 			return nullptr;
 		}
 
+		/*
+			remove
+
+			Time complexity : O(n) — Linear
+			Reason : The nodes of the linked list need to be iterated through in order to find the key of the node to remove
+		*/
 		bool remove(Key k)
 		{
 			if (!m_root)
@@ -120,6 +173,12 @@ namespace Containers
 			return false;
 		}
 
+		/*
+			removeIf
+
+			Time complexity : O(n^2) — Quadratic
+			Reason : The nodes are iterated through in order to be passed to the higher order function. Nodes which then need to be removed are once again iterated through.
+		*/
 		template <typename T>
 		void removeIf(std::function<T> p)
 		{
