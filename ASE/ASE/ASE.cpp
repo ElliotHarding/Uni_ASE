@@ -14,7 +14,7 @@ using namespace Containers;
 using namespace std;
 using namespace std::chrono;
 
-std::string c_inputFile = "C:/Users/elliot/Documents/Github/Uni_ASE/ASE/input-papers-200.txt";
+std::string c_inputFile = "C:/Users/elliot/Documents/Github/Uni_ASE/ASE/input-papers-20k.txt";
 
 void unorderedMap_list_algorithm()
 {
@@ -204,6 +204,30 @@ int main()
 	stop = high_resolution_clock::now();
 	duration = duration_cast<microseconds>(stop - start);
 	cout << duration.count() << endl;
+
+	/*
+		Timings:
+
+		172876
+		141256
+		31182
+
+		282643
+		286948
+		116723
+
+		58154016
+		57857447
+		61112734
+
+		57133002
+		56880218
+		60372151
+
+		477649492
+		476964182
+		717824779
+	*/
 	
 	
 	
