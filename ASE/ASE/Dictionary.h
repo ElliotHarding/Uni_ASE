@@ -18,7 +18,8 @@ namespace Containers
 
 		~Dictionary()
 		{
-			deepDelete(m_root);
+			if(m_root != nullptr)
+				deepDelete(m_root);
 		}
 
 		//Copy constructor
