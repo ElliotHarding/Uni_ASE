@@ -1,6 +1,3 @@
-// ASE.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include "pch.h"
 #include <iostream>
 #include "Dictionary.h"
@@ -14,7 +11,7 @@ using namespace Containers;
 using namespace std;
 using namespace std::chrono;
 
-std::string c_inputFile = "C:/Users/elliot/Documents/Github/Uni_ASE/ASE/input-papers-20k.txt";
+std::string c_inputFile = "C:/input-papers-20.txt";
 
 void unorderedMap_list_algorithm()
 {
@@ -40,8 +37,7 @@ void unorderedMap_list_algorithm()
 			bool found = true;
 			while (found)
 			{
-				std::string s = results.back();
-				unordered_map<string, string>::iterator ss = map.find(s);
+				unordered_map<string, string>::iterator ss = map.find(results.back());
 				if (ss != map.end())
 					results.push_back(ss->second);
 				else
@@ -55,8 +51,7 @@ void unorderedMap_list_algorithm()
 				found = false;
 				for (std::pair<string, string> p : map)
 				{
-					const string s = results.front();
-					if (p.second == s)
+					if (p.second == results.front())
 					{
 						results.push_front(p.first);
 						found = true;
@@ -68,6 +63,112 @@ void unorderedMap_list_algorithm()
 	catch (...)
 	{
 	}	
+}
+
+void unorderedMaps_list_algorithm(const string inputFile)
+{
+	unordered_map<string, string> westMap;
+	unordered_map<string, string> eastMap;
+	try
+	{
+		ifstream file(inputFile);
+		if (file.is_open())
+		{
+			string line;
+			while (getline(file, line))
+			{
+				const string s = line.c_str();
+				const size_t delimiterIndex = s.find(',');
+				const string leftName = s.substr(0, delimiterIndex);
+				const string rightName = s.substr(delimiterIndex + 1, s.length());
+				westMap.insert(make_pair(leftName, rightName));
+				eastMap.insert(make_pair(rightName, leftName));
+			}
+			file.close();
+
+			list<string> results;
+			results.push_back(westMap.begin()->first);
+
+			//West direciton
+			bool found = true;
+			while (found)
+			{
+				unordered_map<string, string>::iterator ss = westMap.find(results.back());
+				if (ss != westMap.end())
+					results.push_back(ss->second);
+				else
+					found = false;
+			}
+
+			//East direction
+			found = true;
+			while (found)
+			{
+				unordered_map<string, string>::iterator ss = eastMap.find(results.front());
+				if (ss != eastMap.end())
+					results.push_front(ss->second);
+				else
+					found = false;
+			}
+		}
+	}
+	catch (...)
+	{
+	}
+}
+
+void unorderedMaps_unorderedMap_algorithm(const string inputFile)
+{
+	unordered_map<string, string> westMap;
+	unordered_map<string, string> eastMap;
+	try
+	{
+		std::ifstream file(inputFile);
+		if (file.is_open())
+		{
+			std::string line;
+			while (getline(file, line))
+			{
+				const string s = line.c_str();
+				const size_t delimiterIndex = s.find(',');
+				const string leftName = s.substr(0, delimiterIndex);
+				const string rightName = s.substr(delimiterIndex + 1, s.length());
+				westMap.insert(make_pair(leftName, rightName));
+				eastMap.insert(make_pair(rightName, leftName));
+			}
+			file.close();
+
+			int valuePosition = westMap.size();
+			unordered_map<int, string> results;
+			results.insert(std::make_pair(valuePosition, westMap.begin()->first));
+
+			//West direciton
+			bool found = true;
+			while (found)
+			{
+				auto ss = westMap.find(results.find(valuePosition)->second);
+				if (ss != westMap.end())
+					results.insert(std::make_pair(++valuePosition, ss->second));
+				else
+					found = false;
+			}
+
+			//East direction
+			valuePosition = westMap.size();
+			found = true;
+			while (found)
+			{
+				auto ss = eastMap.find(results.find(valuePosition)->second);
+				if (ss != eastMap.end())
+					results.insert(std::make_pair(--valuePosition, ss->second));
+				else
+					found = false;
+			}
+		}
+	}
+	catch (...)
+	{
+	}
 }
 
 void map_list_algorithm()
@@ -94,8 +195,7 @@ void map_list_algorithm()
 			bool found = true;
 			while (found)
 			{
-				std::string s = results.back();
-				auto ss = map.find(s);
+				auto ss = map.find(results.back());
 				if (ss != map.end())
 					results.push_back(ss->second);
 				else
@@ -109,8 +209,7 @@ void map_list_algorithm()
 				found = false;
 				for (std::pair<string, string> p : map)
 				{
-					const string s = results.front();
-					if (p.second == s)
+					if (p.second == results.front())
 					{
 						results.push_front(p.first);
 						found = true;
@@ -124,9 +223,110 @@ void map_list_algorithm()
 	}
 }
 
-void map_unorderedMap_algorithm()
+void maps_list_algorithm(const string inputFile)
 {
-	//cant do because unordered
+	map<string, string> westMap;
+	map<string, string> eastMap;
+	try
+	{
+		std::ifstream file(inputFile);
+		if (file.is_open())
+		{
+			std::string line;
+			while (getline(file, line))
+			{
+				const string s = line.c_str();
+				const size_t delimiterIndex = s.find(',');
+				const string leftName = s.substr(0, delimiterIndex);
+				const string rightName = s.substr(delimiterIndex + 1, s.length());
+				westMap.insert(make_pair(leftName, rightName));
+				eastMap.insert(make_pair(rightName, leftName));
+			}
+			file.close();
+
+			list<string> results;
+			results.push_back(westMap.begin()->first);
+
+			//West direciton
+			bool found = true;
+			while (found)
+			{
+				auto ss = westMap.find(results.back());
+				if (ss != westMap.end())
+					results.push_back(ss->second);
+				else
+					found = false;
+			}
+
+			//East direction
+			found = true;
+			while (found)
+			{
+				auto ss = eastMap.find(results.front());
+				if (ss != eastMap.end())
+					results.push_front(ss->second);
+				else
+					found = false;				
+			}
+		}
+	}
+	catch (...)
+	{
+	}
+}
+
+void maps_unorderedMap_algorithm(const string inputFile)
+{
+	map<string, string> westMap;
+	map<string, string> eastMap;
+	try
+	{
+		std::ifstream file(inputFile);
+		if (file.is_open())
+		{
+			std::string line;
+			while (getline(file, line))
+			{
+				const string s = line.c_str();
+				const size_t delimiterIndex = s.find(',');
+				const string leftName = s.substr(0, delimiterIndex);
+				const string rightName = s.substr(delimiterIndex + 1, s.length());
+				westMap.insert(make_pair(leftName, rightName));
+				eastMap.insert(make_pair(rightName, leftName));
+			}
+			file.close();
+
+			int valuePosition = westMap.size();
+			unordered_map<int, string> results;
+			results.insert(std::make_pair(valuePosition, westMap.begin()->first));
+
+			//West direciton
+			bool found = true;
+			while (found)
+			{				
+				auto ss = westMap.find(results.find(valuePosition)->second);
+				if (ss != westMap.end())
+					results.insert(std::make_pair(++valuePosition, ss->second));
+				else
+					found = false;
+			}
+
+			//East direction
+			valuePosition = westMap.size();
+			found = true;
+			while (found)
+			{
+				auto ss = eastMap.find(results.find(valuePosition)->second);
+				if (ss != eastMap.end())
+					results.insert(std::make_pair(--valuePosition, ss->second));
+				else
+					found = false;
+			}
+		}
+	}
+	catch (...)
+	{
+	}
 }
 
 void unorderedMap_map_algorithm()
@@ -154,8 +354,7 @@ void unorderedMap_map_algorithm()
 			bool found = true;
 			while (found)
 			{
-				std::string s = results.rbegin()->second;
-				unordered_map<string, string>::iterator ss = map.find(s);
+				unordered_map<string, string>::iterator ss = map.find(results.rbegin()->second);
 				if (ss != map.end())
 					results.insert(make_pair(++valuePosition, ss->second));
 				else
@@ -170,8 +369,7 @@ void unorderedMap_map_algorithm()
 				found = false;
 				for (std::pair<string, string> p : map)
 				{
-					const string s = results.begin()->second;
-					if (p.second == s)
+					if (p.second == results.begin()->second)
 					{
 						results.insert(make_pair(--valuePosition, p.first));
 						found = true;
@@ -187,6 +385,23 @@ void unorderedMap_map_algorithm()
 
 int main()
 {
+	list<string> files = {"input-papers-1K.txt","input-papers-2K.txt", "input-papers-5K.txt", "input-papers-20K.txt", "input-papers-50K.txt", "input-papers-100K.txt", "input-papers-200K.txt", "input-papers-500K.txt", "input-papers-1M.txt", "input-papers-2M.txt", "input-papers-3M.txt"};
+	for (string s : files)
+	{
+		cout << s << endl;
+		auto start = high_resolution_clock::now();
+		//maps_unorderedMap_algorithm("C:/input-papers-200K.txt"); //20361475
+		//unorderedMaps_list_algorithm("C:/input-papers-200K.txt"); //14189857
+		//maps_list_algorithm("C:/"+s);								  
+		//unorderedMaps_unorderedMap_algorithm("C:/input-papers-200K.txt");//17392717
+		auto stop = high_resolution_clock::now();
+		auto duration = duration_cast<microseconds>(stop - start);
+		cout << duration.count() << endl;
+	}
+
+
+
+	/*
 	auto start = high_resolution_clock::now();
 	unorderedMap_map_algorithm();
 	auto stop = high_resolution_clock::now();
@@ -205,7 +420,17 @@ int main()
 	duration = duration_cast<microseconds>(stop - start);
 	cout << duration.count() << endl;
 
-	/*
+	start = high_resolution_clock::now();
+	unorderedMaps_list_algorithm();
+	stop = high_resolution_clock::now();
+	duration = duration_cast<microseconds>(stop - start);
+	cout << duration.count() << endl;
+
+	maps_list_algorithm();
+	
+
+
+	
 		Timings:
 
 		172876
