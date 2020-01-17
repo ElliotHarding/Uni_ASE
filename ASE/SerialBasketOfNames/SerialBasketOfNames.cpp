@@ -115,9 +115,9 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 					}
 					else if (gIterator != G.end() && fIterator->second == gIterator->second)
 					{
-						G_.push_back(make_pair(gIterator->first + t, fIterator->first));
+						G_.push_back(make_pair(gIterator->first - t, fIterator->first));
 						fIterator++;
-						hIterator++;
+						gIterator++;
 					}
 					else if (fIterator->second > gIterator->second)
 					{
@@ -131,10 +131,10 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 				}
 
 				G_.sort(CompareIntStringPairRight());
-				for (list<pair<int, string>>::iterator i = G_.begin(); i != G_.end(); i++)
+				while (!G_.empty())
 				{
-					G.push_back(*i);
-					G_.remove(*i);
+					G.push_back(*G_.begin());
+					G_.pop_front();
 				}
 
 				t *= 2;
@@ -149,7 +149,7 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 	{
 	}
 }
-//C:/input-papers-20.txt
+//C:/test.txt
 int main()
 {
 	string fileLocation;
