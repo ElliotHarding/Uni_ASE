@@ -78,8 +78,6 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 						found = true;
 						break;
 					}
-
-					//Might put 0 & 1 here into G... //Check map example...
 				}
 
 				if (!found)
@@ -113,20 +111,21 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 						fIterator++;
 						hIterator++;
 					}
-					else if (gIterator != G.end() && fIterator->second == gIterator->second)
+					else if (fIterator->second == gIterator->second)
 					{
 						G_.push_back(make_pair(gIterator->first - t, fIterator->first));
 						fIterator++;
-						gIterator++;
+						gIterator++;							
 					}
 					else if (fIterator->second > gIterator->second)
 					{
-						gIterator++;
+						gIterator++;							
 					}
 					else if (fIterator->second > hIterator->first)
 					{
 						hIterator++;
 					}
+					fIterator++;
 					//Error?
 				}
 
