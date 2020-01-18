@@ -23,11 +23,10 @@ namespace Containers
 		}
 
 		/*
-		Constructor
+		Destructor
 
-		Time complexity :
-		Reason:
-
+		Time complexity: O(n) — Linear
+		Reason: The recursive function ‘deepDelete’ goes through each of the items in the dictionaries linked list.
 		*/
 		~Dictionary()
 		{
@@ -51,8 +50,7 @@ namespace Containers
 			Move constructor
 
 			Time complexity : O(n) — Linear
-			Reason: The recursive function deepCopy goes through each of the items in the dictionaries linked list
-
+			Reason: The recursive function ‘deepCopy’ performs actions off each of the items in the dictionaries linked list.
 		*/
 		Dictionary(Dictionary&& d)
 		{
@@ -64,7 +62,7 @@ namespace Containers
 			Copy assignment operator
 
 			Time complexity : O(n) — Linear
-			Reason : The recursive function deepCopy goes through each of the items in the dictionaries linked list
+			Reason: The recursive function ‘deepCopy’ performs actions off each of the items in the dictionaries linked list.
 		*/
 		Dictionary& operator=(const Dictionary& d)
 		{
@@ -75,7 +73,7 @@ namespace Containers
 			Move assignment operator
 
 			Time complexity : O(n) — Linear
-			Reason : The recursive function deepCopy goes through each of the items in the dictionaries linked list
+			Reason: The recursive function ‘deepCopy’ performs actions off each of the items in the dictionaries linked list.
 		*/
 		Dictionary& operator=(Dictionary&& d)
 		{
