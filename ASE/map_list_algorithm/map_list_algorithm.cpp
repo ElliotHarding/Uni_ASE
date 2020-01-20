@@ -8,30 +8,33 @@ using namespace std;
 
 void map_list_algorithm(const string c_inputFile, list<string>& results)
 {
-	map<string, string> map;
+	map<string, string> westMap;
+	map<string, string> eastMap;
 	try
 	{
-		ifstream file(c_inputFile);
+		std::ifstream file(c_inputFile);
 		if (file.is_open())
 		{
-			string line;
+			std::string line;
 			while (getline(file, line))
 			{
 				const string s = line.c_str();
 				const size_t delimiterIndex = s.find(',');
-				map.insert(make_pair(s.substr(0, delimiterIndex), s.substr(delimiterIndex + 1, s.length())));
+				const string leftName = s.substr(0, delimiterIndex);
+				const string rightName = s.substr(delimiterIndex + 1, s.length());
+				westMap.insert(make_pair(leftName, rightName));
+				eastMap.insert(make_pair(rightName, leftName));
 			}
 			file.close();
 
-			//Start with arbiturary 
-			results.push_back(map.begin()->first);
+			results.push_back(westMap.begin()->first);
 
 			//West direciton
 			bool found = true;
 			while (found)
 			{
-				auto ss = map.find(results.back());
-				if (ss != map.end())
+				auto ss = westMap.find(results.back());
+				if (ss != westMap.end())
 					results.push_back(ss->second);
 				else
 					found = false;
@@ -41,15 +44,11 @@ void map_list_algorithm(const string c_inputFile, list<string>& results)
 			found = true;
 			while (found)
 			{
-				found = false;
-				for (pair<string, string> p : map)
-				{
-					if (p.second == results.front())
-					{
-						results.push_front(p.first);
-						found = true;
-					}
-				}
+				auto ss = eastMap.find(results.front());
+				if (ss != eastMap.end())
+					results.push_front(ss->second);
+				else
+					found = false;
 			}
 		}
 	}

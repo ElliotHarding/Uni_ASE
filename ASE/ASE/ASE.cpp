@@ -13,6 +13,7 @@ using namespace std::chrono;
 
 std::string c_inputFile = "C:/input-papers-20.txt";
 
+/*
 void unorderedMap_list_algorithm()
 {
 	unordered_map<string, string> map;
@@ -63,58 +64,6 @@ void unorderedMap_list_algorithm()
 	catch (...)
 	{
 	}	
-}
-
-void unorderedMaps_list_algorithm(const string inputFile)
-{
-	unordered_map<string, string> westMap;
-	unordered_map<string, string> eastMap;
-	try
-	{
-		ifstream file(inputFile);
-		if (file.is_open())
-		{
-			string line;
-			while (getline(file, line))
-			{
-				const string s = line.c_str();
-				const size_t delimiterIndex = s.find(',');
-				const string leftName = s.substr(0, delimiterIndex);
-				const string rightName = s.substr(delimiterIndex + 1, s.length());
-				westMap.insert(make_pair(leftName, rightName));
-				eastMap.insert(make_pair(rightName, leftName));
-			}
-			file.close();
-
-			list<string> results;
-			results.push_back(westMap.begin()->first);
-
-			//West direciton
-			bool found = true;
-			while (found)
-			{
-				unordered_map<string, string>::iterator ss = westMap.find(results.back());
-				if (ss != westMap.end())
-					results.push_back(ss->second);
-				else
-					found = false;
-			}
-
-			//East direction
-			found = true;
-			while (found)
-			{
-				unordered_map<string, string>::iterator ss = eastMap.find(results.front());
-				if (ss != eastMap.end())
-					results.push_front(ss->second);
-				else
-					found = false;
-			}
-		}
-	}
-	catch (...)
-	{
-	}
 }
 
 void unorderedMaps_unorderedMap_algorithm(const string inputFile)
@@ -223,57 +172,6 @@ void map_list_algorithm()
 	}
 }
 
-void maps_list_algorithm(const string inputFile)
-{
-	map<string, string> westMap;
-	map<string, string> eastMap;
-	try
-	{
-		std::ifstream file(inputFile);
-		if (file.is_open())
-		{
-			std::string line;
-			while (getline(file, line))
-			{
-				const string s = line.c_str();
-				const size_t delimiterIndex = s.find(',');
-				const string leftName = s.substr(0, delimiterIndex);
-				const string rightName = s.substr(delimiterIndex + 1, s.length());
-				westMap.insert(make_pair(leftName, rightName));
-				eastMap.insert(make_pair(rightName, leftName));
-			}
-			file.close();
-
-			list<string> results;
-			results.push_back(westMap.begin()->first);
-
-			//West direciton
-			bool found = true;
-			while (found)
-			{
-				auto ss = westMap.find(results.back());
-				if (ss != westMap.end())
-					results.push_back(ss->second);
-				else
-					found = false;
-			}
-
-			//East direction
-			found = true;
-			while (found)
-			{
-				auto ss = eastMap.find(results.front());
-				if (ss != eastMap.end())
-					results.push_front(ss->second);
-				else
-					found = false;				
-			}
-		}
-	}
-	catch (...)
-	{
-	}
-}
 
 void maps_unorderedMap_algorithm(const string inputFile)
 {
@@ -381,24 +279,124 @@ void unorderedMap_map_algorithm()
 	catch (...)
 	{
 	}
+}*/
+
+void maps_list_algorithm(const string inputFile)
+{
+	map<string, string> westMap;
+	map<string, string> eastMap;
+	try
+	{
+		std::ifstream file(inputFile);
+		if (file.is_open())
+		{
+			std::string line;
+			while (getline(file, line))
+			{
+				const string s = line.c_str();
+				const size_t delimiterIndex = s.find(',');
+				const string leftName = s.substr(0, delimiterIndex);
+				const string rightName = s.substr(delimiterIndex + 1, s.length());
+				westMap.insert(make_pair(leftName, rightName));
+				eastMap.insert(make_pair(rightName, leftName));
+			}
+			file.close();
+
+			list<string> results;
+			results.push_back(westMap.begin()->first);
+
+			//West direciton
+			bool found = true;
+			while (found)
+			{
+				auto ss = westMap.find(results.back());
+				if (ss != westMap.end())
+					results.push_back(ss->second);
+				else
+					found = false;
+			}
+
+			//East direction
+			found = true;
+			while (found)
+			{
+				auto ss = eastMap.find(results.front());
+				if (ss != eastMap.end())
+					results.push_front(ss->second);
+				else
+					found = false;
+			}
+		}
+	}
+	catch (...)
+	{
+	}
+}
+
+void unorderedMaps_list_algorithm(const string inputFile)
+{
+	unordered_map<string, string> westMap;
+	unordered_map<string, string> eastMap;
+	try
+	{
+		ifstream file(inputFile);
+		if (file.is_open())
+		{
+			string line;
+			while (getline(file, line))
+			{
+				const string s = line.c_str();
+				const size_t delimiterIndex = s.find(',');
+				const string leftName = s.substr(0, delimiterIndex);
+				const string rightName = s.substr(delimiterIndex + 1, s.length());
+				westMap.insert(make_pair(leftName, rightName));
+				eastMap.insert(make_pair(rightName, leftName));
+			}
+			file.close();
+
+			list<string> results;
+			results.push_back(westMap.begin()->first);
+
+			//West direciton
+			bool found = true;
+			while (found)
+			{
+				unordered_map<string, string>::iterator ss = westMap.find(results.back());
+				if (ss != westMap.end())
+					results.push_back(ss->second);
+				else
+					found = false;
+			}
+
+			//East direction
+			found = true;
+			while (found)
+			{
+				unordered_map<string, string>::iterator ss = eastMap.find(results.front());
+				if (ss != eastMap.end())
+					results.push_front(ss->second);
+				else
+					found = false;
+			}
+		}
+	}
+	catch (...)
+	{
+	}
 }
 
 int main()
 {
-	list<string> files = {"input-papers-1K.txt","input-papers-2K.txt", "input-papers-5K.txt", "input-papers-20K.txt", "input-papers-50K.txt", "input-papers-100K.txt", "input-papers-200K.txt", "input-papers-500K.txt", "input-papers-1M.txt", "input-papers-2M.txt", "input-papers-3M.txt"};
+	list<string> files = {"1K","2K", "5K", "20K", "50K", "100K", "200K", "500K", "1M", "2M", "3M"};
 	for (string s : files)
 	{
 		cout << s << endl;
 		auto start = high_resolution_clock::now();
-		//maps_unorderedMap_algorithm("C:/input-papers-200K.txt"); //20361475
-		//unorderedMaps_list_algorithm("C:/input-papers-200K.txt"); //14189857
-		//maps_list_algorithm("C:/"+s);								  
-		//unorderedMaps_unorderedMap_algorithm("C:/input-papers-200K.txt");//17392717
+		maps_list_algorithm("C:/input-papers-" + s + ".txt");
 		auto stop = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(stop - start);
 		cout << duration.count() << endl;
 	}
-
 
 
 	/*
@@ -427,9 +425,6 @@ int main()
 	cout << duration.count() << endl;
 
 	maps_list_algorithm();
-	
-
-
 	
 		Timings:
 
