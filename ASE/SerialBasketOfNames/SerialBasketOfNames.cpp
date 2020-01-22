@@ -95,13 +95,13 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 						fIterator++;
 						hIterator++;
 					}
-					else if (fIterator->second == gIterator->second)
+					else if (gIterator!=G.end() && fIterator->second == gIterator->second)
 					{
 						G_.push_back(make_pair(gIterator->first - t, fIterator->first));
 						fIterator++;
 						gIterator++;							
 					}
-					else if (fIterator->second > gIterator->second)
+					else if (gIterator != G.end() && fIterator->second > gIterator->second)
 					{
 						gIterator++;							
 					}
