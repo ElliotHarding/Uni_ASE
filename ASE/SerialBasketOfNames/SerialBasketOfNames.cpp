@@ -11,7 +11,7 @@ struct ComparePairLeft
 {
 	bool operator ()(const pair<left, right>& item1, const pair<left, right>& item2)
 	{
-		return item1.second < item2.second;
+		return item1.first < item2.first;
 	}
 };
 
@@ -113,7 +113,7 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 					}
 				}
 
-				G_.sort(CompareIntStringPairRight());
+				G_.sort(ComparePairRight<int,string>());
 				while (!G_.empty())
 				{
 					G.push_back(*G_.begin());
