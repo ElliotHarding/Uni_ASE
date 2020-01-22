@@ -6,33 +6,19 @@
 
 using namespace std;
 
-struct CompareStringPairLeft
+template<typename left, typename right> 
+struct ComparePairLeft
 {
-	bool operator ()(const pair<string, string>& item1, const pair<string, string>& item2)
-	{
-		return item1.first < item2.first;
-	}
-};
-
-struct CompareStringPairRight
-{
-	bool operator ()(const pair<string, string>& item1, const pair<string, string>& item2)
+	bool operator ()(const pair<left, right>& item1, const pair<left, right>& item2)
 	{
 		return item1.second < item2.second;
 	}
 };
 
-struct CompareIntStringPairRight
+template<typename left, typename right>
+struct ComparePairRight
 {
-	bool operator ()(const pair<int, string>& item1, const pair<int, string>& item2)
-	{
-		return item1.second < item2.second;
-	}
-};
-
-struct CompareIntStringPairLeft
-{
-	bool operator ()(const pair<int, string>& item1, const pair<int, string>& item2)
+	bool operator ()(const pair<left, right>& item1, const pair<left, right>& item2)
 	{
 		return item1.second < item2.second;
 	}
@@ -60,8 +46,8 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 			}
 			file.close();
 
-			rightSorted.sort(CompareStringPairRight());
-			leftSorted.sort(CompareStringPairLeft());
+			rightSorted.sort(ComparePairRight<string, string>());
+			leftSorted.sort(ComparePairLeft<string,string>());
 
 			const int N = rightSorted.size()+1;
 			
@@ -87,14 +73,14 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 				}
 			}
 
-			G.sort(CompareIntStringPairRight());
+			G.sort(ComparePairRight<int,string>());
 
 			list<pair<string, string>> H = F;
 			list<pair<string, string>> F_;
 			list<pair<int, string>> G_;
 
-			H.sort(CompareStringPairLeft());
-			F.sort(CompareStringPairRight());
+			H.sort(ComparePairLeft<string,string>());
+			F.sort(ComparePairRight<string,string>());
 
 			int t = 2;
 			while (t < N)
@@ -125,8 +111,6 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 					{
 						hIterator++;
 					}
-					fIterator++;
-					//Error?
 				}
 
 				G_.sort(CompareIntStringPairRight());
@@ -141,7 +125,7 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 				F_.clear();
 			}
 
-			G.sort(CompareIntStringPairLeft());
+			G.sort(ComparePairLeft<int,string>());
 		}
 	}
 	catch (...)
