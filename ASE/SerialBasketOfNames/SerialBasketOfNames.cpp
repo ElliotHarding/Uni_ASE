@@ -73,25 +73,23 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 				}
 			}
 
-			G.sort(ComparePairRight<int,string>());
-
-			list<pair<string, string>> H = F;
-			list<pair<string, string>> F_;
-			list<pair<int, string>> G_;
-
-			H.sort(ComparePairLeft<string,string>());
-			F.sort(ComparePairRight<string,string>());
-
+			list<pair<string, string>> F_, H;
+			list<pair<int, string>> G_;			
 			int t = 2;
 			while (t < N)
 			{
+				H = F;
+				H.sort(ComparePairLeft<string, string>());
+				F.sort(ComparePairRight<string, string>());
+				G.sort(ComparePairRight<int, string>());
+
 				list<pair<string, string>>::iterator fIterator = F.begin();
 				list<pair<string, string>>::iterator hIterator = H.begin();
 				list<pair<int, string>>::iterator gIterator = G.begin();
 				
 				while (fIterator != F.end())
 				{
-					if (fIterator->second == hIterator->first)
+					if (hIterator!= H.end() && fIterator->second == hIterator->first)
 					{
 						F_.push_back(make_pair(fIterator->first, hIterator->second));
 						fIterator++;
