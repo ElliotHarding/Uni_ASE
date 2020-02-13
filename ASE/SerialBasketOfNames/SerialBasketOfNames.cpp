@@ -53,6 +53,7 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 			
 			list<pair<string, string>> F;//List with xi, xi+2 will become F...
 
+			/*
 			for (pair<string, string> rightPair : rightSorted)
 			{
 				bool found = false;
@@ -71,7 +72,61 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 					G.push_back(make_pair(N - 1, rightPair.first));
 					G.push_back(make_pair(N, rightPair.second));
 				}
+			}*/
+
+			list<pair<string, string>>::iterator rIterator = rightSorted.begin();
+			list<pair<string, string>>::iterator lIterator = leftSorted.begin();
+			pair<string, string> lPrevious;
+			pair<string, string> rPrevious;
+			bool linkNotFound = false;
+
+			while (rIterator != rightSorted.end() && lIterator != leftSorted.end())
+			{
+				if (lIterator->first == rIterator->second)
+				{
+					F.push_back(make_pair(rIterator->first, lIterator->second));
+					if (linkNotFound)
+					{
+						G.push_back(make_pair(N - 1, rPrevious.first));
+						G.push_back(make_pair(N, rPrevious.second));
+						linkNotFound = false;
+					}
+				}
+				else
+				{
+					if (lIterator->first == rPrevious.second)
+					{
+						F.push_back(make_pair(rPrevious.first, lIterator->second));
+						linkNotFound = false;
+					}
+					else if (rIterator->second == lPrevious.first)
+					{
+						F.push_back(make_pair(rIterator->first, lPrevious.second));
+						if (linkNotFound)
+						{							
+							G.push_back(make_pair(N - 1, rPrevious.first));
+							G.push_back(make_pair(N, rPrevious.second));
+							linkNotFound = false;
+						}						
+					}
+					else
+					{
+						linkNotFound = true;
+					}
+				}
+
+				rPrevious = *rIterator;
+				lPrevious = *lIterator;
+				rIterator++;
+				lIterator++;
+
+				if (rIterator == rightSorted.end() && G.size() < 2)
+				{
+					G.push_back(make_pair(N - 1, rPrevious.first));
+					G.push_back(make_pair(N, rPrevious.second));
+				}
 			}
+
 
 			list<pair<string, string>> F_, H;
 			list<pair<int, string>> G_;			
@@ -131,11 +186,12 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 	}
 }
 
+/*
 #include <chrono>
 using namespace std::chrono;
 int main()
 {
-	list<string> files = { "1K","2K", "5K", "20K", /*"50K", "100K", "200K", "500K", "1M", "2M", "3M" */};
+	list<string> files = { "1K","2K", "5K", "20K", /*"50K", "100K", "200K", "500K", "1M", "2M", "3M" * /};
 	for (string s : files)
 	{
 		cout << s << endl;
@@ -147,8 +203,9 @@ int main()
 		cout << duration.count() << endl;
 	}
 }
+*/
 
-/*
+
 int main()
 {
 	string fileLocation;
@@ -161,4 +218,4 @@ int main()
 	{
 		cout << i.second << endl;
 	}
-}*/
+}
