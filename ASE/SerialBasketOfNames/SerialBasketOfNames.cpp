@@ -51,80 +51,31 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 
 			const int N = rightSorted.size()+1;
 			
-			list<pair<string, string>> F;//List with xi, xi+2 will become F...
-
-			/*
-			for (pair<string, string> rightPair : rightSorted)
-			{
-				bool found = false;
-				for (pair<string, string> leftPair : leftSorted)
-				{
-					if (rightPair.second == leftPair.first)
-					{
-						F.push_back(make_pair(rightPair.first, leftPair.second));
-						found = true;
-						break;
-					}
-				}
-
-				if (!found)
-				{
-					G.push_back(make_pair(N - 1, rightPair.first));
-					G.push_back(make_pair(N, rightPair.second));
-				}
-			}*/
-
+			list<pair<string, string>> F;//List with xi, xi+2 will become F...		
 			list<pair<string, string>>::iterator rIterator = rightSorted.begin();
 			list<pair<string, string>>::iterator lIterator = leftSorted.begin();
-			pair<string, string> lPrevious;
-			pair<string, string> rPrevious;
-			bool linkNotFound = false;
 
-			while (rIterator != rightSorted.end() && lIterator != leftSorted.end())
+			while (lIterator != leftSorted.end() && rIterator != rightSorted.end())
 			{
 				if (lIterator->first == rIterator->second)
-				{
-					F.push_back(make_pair(rIterator->first, lIterator->second));
-					if (linkNotFound)
-					{
-						G.push_back(make_pair(N - 1, rPrevious.first));
-						G.push_back(make_pair(N, rPrevious.second));
-						linkNotFound = false;
-					}
-				}
+					F.push_back(std::make_pair(rIterator->first, lIterator->second));
 				else
 				{
-					if (lIterator->first == rPrevious.second)
-					{
-						F.push_back(make_pair(rPrevious.first, lIterator->second));
-						linkNotFound = false;
-					}
-					else if (rIterator->second == lPrevious.first)
-					{
-						F.push_back(make_pair(rIterator->first, lPrevious.second));
-						if (linkNotFound)
-						{							
-							G.push_back(make_pair(N - 1, rPrevious.first));
-							G.push_back(make_pair(N, rPrevious.second));
-							linkNotFound = false;
-						}						
-					}
+					lIterator++;
+					if (lIterator->first == rIterator->second)
+						F.push_back(std::make_pair(rIterator->first, lIterator->second ));
 					else
 					{
-						linkNotFound = true;
+						lIterator--;
+						G.push_back(std::make_pair(N - 1, rIterator->first));
+						G.push_back(std::make_pair(N, rIterator->second));
+						rIterator++;
+						if (lIterator->first == rIterator->second)
+							F.push_back(std::make_pair(rIterator->first, lIterator->second));
 					}
 				}
-
-				rPrevious = *rIterator;
-				lPrevious = *lIterator;
-				rIterator++;
 				lIterator++;
-
-				if (rIterator == rightSorted.end() && G.size() < 2)
-				{
-					G.push_back(make_pair(N - 1, rPrevious.first));
-					G.push_back(make_pair(N, rPrevious.second));
-				}
+				rIterator++;
 			}
 
 
