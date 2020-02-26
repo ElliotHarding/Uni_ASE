@@ -137,25 +137,23 @@ void algorithm(const string inputFile, list<pair<int, string>>& G)
 	}
 }
 
-/*
-#include <chrono>
-using namespace std::chrono;
-int main()
-{
-	list<string> files = { "1K","2K", "5K", "20K", /*"50K", "100K", "200K", "500K", "1M", "2M", "3M" * /};
-	for (string s : files)
-	{
-		cout << s << endl;
-		auto start = high_resolution_clock::now();
-		list<pair<int, string>> results;
-		algorithm("C:/input-papers-" + s + ".txt", results);
-		auto stop = high_resolution_clock::now();
-		auto duration = duration_cast<microseconds>(stop - start);
-		cout << duration.count() << endl;
-	}
-}
-*/
 
+//#include <chrono>
+//using namespace std::chrono;
+//int main()
+//{
+//	list<string> files = {"20", "50", "200", "500", "1K", "2K", "5K", "20K", "50K", "100K", "200K", "500K", "1M", "2M", "3M" };
+//	for (string s : files)
+//	{
+//		cout << s << endl;
+//		auto start = high_resolution_clock::now();
+//		list<pair<int, string>> results;
+//		algorithm("C:/input-papers-" + s + ".txt", results);
+//		auto stop = high_resolution_clock::now();
+//		auto duration = duration_cast<microseconds>(stop - start);
+//		cout << duration.count() << endl;
+//	}
+//}
 
 int main()
 {
